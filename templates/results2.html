@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Twitter Project - Ensae</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="{{ url_for('static', filename='bootstrap1.css') }}" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="{{ url_for('static', filename='2-col-portfolio.css') }}" rel="stylesheet">
+	
+	<link href="{{ url_for('static', filename='styles.css') }}" rel="stylesheet">
+
+    <!--<script src="js/jqcloud.min.js"></script> -->
+
+    <link href="{{ url_for('static', filename='jqcloud.min.css') }}" rel="stylesheet">
+
+    <script src="{{ url_for('static', filename='jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='docs.min.js') }}"></script>
+
+    <script src="{{ url_for('static', filename='jqcloud.min.js') }}"></script>
+    <!--<script src="http://mistic100.github.io/jQCloud/dist/demo-words.js"></script> -->
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+				<li>
+					<a class="navbar-brand" href="{{ url_for('hello') }}">Home</a>
+				</li>
+
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="#">About us</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+        <!-- Page Header -->
+
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="page-header">Twitter Communities
+                    <small>Query: {{query}}, Language: {{LangBeautifulString}}, Date: {{date}} </small>
+                </h2>
+				<div>
+					<form action="{{query}}_{{lang}}_{{date}}" method="POST">
+						<center>
+							<h4>Customize your own option:
+								<select style="height:25px;width:200px;font-size:15px;color:black" name="old_queries">
+									{% if results[1] != [] %}
+										{% for a in results[1] %}
+										<option value='{"query":"{{query}}","date":"{{a["date"]}}","language":"{{a["language"]}}"}'>Dutch / {{a["date"]}}</option>
+										{% endfor %}
+									{% endif %}
+									
+									{% if results[2] != [] %}
+										{% for a in results[2] %}
+										<option value='{"query":"{{query}}","date":"{{a["date"]}}","language":"{{a["language"]}}"}'>English / {{a["date"]}}</option>
+										{% endfor %}
+									{% endif %}
+								
+									{% if results[3] != [] %}
+										{% for a in results[3] %}
+										<option value='{"query":"{{query}}","date":"{{a["date"]}}","language":"{{a["language"]}}"}'>French / {{a["date"]}}</option>
+										{% endfor %}
+									{% endif %}
+								
+									{% if results[4] != [] %}
+										{% for a in results[4] %}
+										<option value='{"query":"{{query}}","date":"{{a["date"]}}","language":"{{a["language"]}}"}'>German / {{a["date"]}}</option>
+										{% endfor %}
+									{% endif %}
+								
+									{% if results[5] != [] %}
+										{% for a in results[5] %}
+										<option value='{"query":"{{query}}","date":"{{a["date"]}}","language":"{{a["language"]}}"}'>Italian / {{a["date"]}}</option>
+										{% endfor %}
+									{% endif %}
+								
+									{% if results[6] != [] %}
+										{% for a in results[6] %}
+										<option value='{"query":"{{query}}","date":"{{a["date"]}}","language":"{{a["language"]}}"}'>Spanish / {{a["date"]}}</option>
+										{% endfor %}
+									{% endif %}
+								</select>
+								<button type="submit">Go!</button>
+							</h4>
+						</center>
+					</form>
+				</div>	
+            </div>
+        </div>
+        <!-- /.row -->
+
+        <!-- Projects Row -->
+        <div class="row">
+                <div class="col-md-6 portfolio-item">
+                    <h3>
+                        <a href="#">Community 1</a>
+                    </h3>
+                    <p>{{ communitySize[0] }} Twitter accounts ({{ communityPercent[0] }} % of the considered accounts).</p>
+                    <div id = "keywords" class="col-md-6"></div>
+                    <script type="text/javascript">
+                        function test_func(words) {
+                            //var words = result['words'];
+                            $('#keywords').jQCloud(words, {
+                                                  autoResize: true,
+                                                  fontSize: {
+                                                        from: 0.15,
+                                                        to: 0.008
+                                                      }
+                                                });
+                        }
+                        test_func({{ communityWords[0]|safe }})
+                    </script>
+                    <!--<script src = "{{ url_for('static', filename='test-jqcloud.js') }}"></script>-->
+
+                </div>
+                <div class="col-md-6 portfolio-item">
+                    <h3>
+                        <a href="#">Community 2</a>
+                    </h3>
+                    <p>{{ communitySize[1] }} Twitter accounts ({{ communityPercent[1] }} % of the considered accounts).</p>
+                    <div id = "keywordsa" class="col-md-6"></div>
+                    <script type="text/javascript">
+                        function test_func(words) {
+                            //var words = result['words'];
+                            $('#keywordsa').jQCloud(words, {
+                                                  autoResize: true,
+                                                  fontSize: {
+                                                        from: 0.15,
+                                                        to: 0.008
+                                                      }
+                                                });
+                        }
+                        test_func({{ communityWords[1]|safe }})
+                    </script>
+                    <!--<script src = "{{ url_for('static', filename='test-jqcloud.js') }}"></script>-->
+                </div>
+        </div>
+        <!-- /.row -->
+        <div class="test"></div>
+        <!-- Projects Row -->
+        <div class="row">
+                <div class="col-md-6 portfolio-item">
+                    <h3>
+                        <a href="#">Community 3</a>
+                    </h3>
+                    <p>{{ communitySize[2] }} Twitter accounts ({{ communityPercent[2] }} % of the considered accounts).</p>
+                    <div id = "keywordsb" class="col-md-6"></div>
+                    <script type="text/javascript">
+                        function test_func(words) {
+                            //var words = result['words'];
+                            $('#keywordsb').jQCloud(words, {
+                                                  autoResize: true,
+                                                  fontSize: {
+                                                        from: 0.15,
+                                                        to: 0.008
+                                                      }
+                                                });
+                        }
+                        test_func({{ communityWords[2]|safe }})
+                    </script>
+                    <!--<script src = "{{ url_for('static', filename='test-jqcloud.js') }}"></script>-->
+                </div>
+                <div class="col-md-6 portfolio-item">
+                    <h3>
+                        <a href="#">Community 4</a>
+                    </h3>
+                    <p>{{ communitySize[3] }} Twitter accounts ({{ communityPercent[3] }} % of the considered accounts).</p>
+                    <div id = "keywordsc" class="col-md-6"></div>
+                    <script type="text/javascript">
+                        function test_func(words) {
+                            //var words = result['words'];
+                            $('#keywordsc').jQCloud(words, {
+                                                  autoResize: true,
+                                                  fontSize: {
+                                                        from: 0.15,
+                                                        to: 0.008
+                                                      }
+                                                });
+                        }
+                        test_func({{ communityWords[3]|safe }})
+                    </script>
+                    <!--<script src = "{{ url_for('static', filename='test-jqcloud.js') }}"></script>-->
+                </div>
+        </div>
+        <!-- /.row -->
+
+        <hr>
+
+        <!-- Footer -->
+        <!--<footer>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>Copyright &copy; Your Website 2014</p>
+                </div>
+            </div>
+
+        </footer>-->
+
+    </div>
+    <!-- /.container -->
+
+    <!-- jQuery
+    <script src="js/jquery.js"></script>
+    <script src="js/jqcloud.min.js"></script>
+
+
+    <script src="js/bootstrap.min.js"></script>
+
+    <script type="text/javascript" src="js/test-jqcloud.js"></script>-->
+
+</body>
+
+</html>

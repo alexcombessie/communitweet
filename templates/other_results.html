@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Twitter Project - Ensae</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="{{ url_for('static', filename='bootstrap1.css') }}" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="{{ url_for('static', filename='2-col-portfolio.css') }}" rel="stylesheet">
+
+    <!--<script src="js/jqcloud.min.js"></script> -->
+
+    <link href="{{ url_for('static', filename='jqcloud.min.css') }}" rel="stylesheet">
+
+    <script src="{{ url_for('static', filename='jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='docs.min.js') }}"></script>
+
+    <script src="{{ url_for('static', filename='jqcloud.min.js') }}"></script>
+    <!--<script src="http://mistic100.github.io/jQCloud/dist/demo-words.js"></script> -->
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="{{ url_for('hello') }}">Home</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="#">About us</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <!-- Page Header -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="page-header">Twitter Communities
+                </h2>
+            </div>
+        </div>
+        <!-- /.row -->
+
+        <!-- Projects Row -->
+        <div class="row">
+		
+				{% if results[1] != [] %}
+                <div class="col-md-6 portfolio-item">
+                    
+					<h3>
+                        <a href="#">Results in Dutch</a>
+                    </h3>
+					{% for a in results[1] %}
+                    <p><a href="{{ url_for('results', query = a["query"], lang = a["language"], date = a["date"]) }}">{{a["query"]}} on the {{a["date"]}}</a></p>
+					{% endfor %}
+					</div>
+				{% endif %}
+				
+				{% if results[2] != [] %}				
+                <div class="col-md-6 portfolio-item">
+					<h3>
+                        <a href="#">Results in English</a>
+                    </h3>
+					{% for a in results[2] %}
+                    <p><a href="{{ url_for('results', query = a["query"], lang = a["language"], date = a["date"]) }}">{{a["query"]}} on the {{a["date"]}}</a></p>
+					{% endfor %}
+					</div>
+				{% endif %}
+				
+				{% if results[3] != [] %}
+                <div class="col-md-6 portfolio-item">
+					<h3>
+                        <a href="#">Results in French</a>
+                    </h3>
+					{% for a in results[3] %}
+                    <p><a href="{{ url_for('results', query = a["query"], lang = a["language"], date = a["date"]) }}">{{a["query"]}} on the {{a["date"]}}</a></p>
+					{% endfor %}
+					</div>
+				{% endif %}
+				
+				{% if results[4] != [] %}
+                <div class="col-md-6 portfolio-item">
+					<h3>
+                        <a href="#">Results in German</a>
+                    </h3>
+					{% for a in results[4] %}
+                    <p><a href="{{ url_for('results', query = a["query"], lang = a["language"], date = a["date"]) }}">{{a["query"]}} on the {{a["date"]}}</a></p>
+					{% endfor %}
+					</div>
+				{% endif %}
+				
+				{% if results[5] != [] %}				
+                <div class="col-md-6 portfolio-item">
+					<h3>
+                        <a href="#">Results in Italian</a>
+                    </h3>
+					{% for a in results[5] %}
+                    <p><a href="{{ url_for('results', query = a["query"], lang = a["language"], date = a["date"]) }}">{{a["query"]}} on the {{a["date"]}}</a></p>
+					{% endfor %}
+					</div>
+				{% endif %}
+				
+				{% if results[6] != [] %}				
+                <div class="col-md-6 portfolio-item">
+					<h3>
+                        <a href="#">Results in Spanish</a>
+                    </h3>
+					{% for a in results[6] %}
+                    <p><a href="{{ url_for('results', query = a["query"], lang = a["language"], date = a["date"]) }}">{{a["query"]}} on the {{a["date"]}}</a></p>
+					{% endfor %}
+					</div>
+				{% endif %}
+				
+				{% if results[0] != [] %}				
+                <div class="col-md-6 portfolio-item">
+					<h3>
+                        <a href="#">Not enough results for these queries:</a>
+                    </h3>
+					{% for a in results[0] %}
+                    <p>{{a["query"]}} in {{a["language"]}} on the {{a["date"]}}</p>
+					{% endfor %}
+					</div>
+				{% endif %}
+						
+
+        <hr>
+
+        <!-- Footer -->
+        <!--<footer>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>Copyright &copy; Your Website 2014</p>
+                </div>
+            </div>
+
+        </footer>-->
+
+    </div>
+    <!-- /.container -->
+
+    <!-- jQuery
+    <script src="js/jquery.js"></script>
+    <script src="js/jqcloud.min.js"></script>
+
+
+    <script src="js/bootstrap.min.js"></script>
+
+    <script type="text/javascript" src="js/test-jqcloud.js"></script>-->
+
+</body>
+
+</html>

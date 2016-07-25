@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Twitter Project - Ensae</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="{{ url_for('static', filename='bootstrap.css') }}" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="{{ url_for('static', filename='stylish-portfolio.css') }}" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="{{ url_for('static', filename='font-awesome.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ url_for('static', filename='googlefont.css') }}" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header id="top" class="header">
+        <div class="text-vertical-center">
+            <h1>CommuniTweet</h1>
+            <h3>Search for a topic on Twitter and find communities around that topic</h3>
+            <br>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h2>{% if TooFew == "True" %}Sorry but we have too few results for your query.
+						{% else %}Thank you for your query, it will be processed soon. Next batch coming in:</h2>
+
+		
+ <script language="JavaScript">
+                
+function t() {
+	var compteur=document.getElementById('compteur');
+    sa=duree;
+    ma=0;ha=0;
+    if(sa<0) {
+        compteur.innerHTML="terminé<br />"
+        }
+    else {
+        if(sa>59) {
+            ma=Math.floor(sa/60);
+            sa=sa-ma*60;
+            }
+        if(ma>59) {
+            ha=Math.floor(ma/60);
+                    ma=ma-ha*60;
+            }
+        if(sa<10) {
+			sa="0"+sa;
+            }
+        if(ma<10) {
+            ma="0"+ma;
+            }
+        compteur.innerHTML=+ha+":"+ma+":"+sa+"<br />"
+        }
+        duree=duree-1;
+        window.setTimeout("t();",1000);
+
+        }
+                
+                </script>				
+                <div id="compteur" style="color:red;font-size:300%"></div>
+                <script language="JavaScript">
+        date = new Date;
+		h = date.getHours();
+		m = date.getMinutes();
+        s = date.getSeconds();
+
+		if(m>=10) {
+			duree=(59-m+10)*60+(59-s);
+		}
+		else{
+			duree=(10-m)*60+(59-s);
+		}
+		t();
+		</script>
+		{% endif %}
+		
+
+                        <h2>{% if TooFew == "False" %}In the meantime, y{% else %}Y{% endif %}ou're welcome to check one of the following queries:</h2>
+                        <div class="links">
+							<a href="{{ url_for('results', query = query1, lang = lang, date = date1) }}">{{query1}}</a>
+							<a href="{{ url_for('results', query = query2, lang = lang, date = date2) }}">{{query2}}</a>
+							<a href="{{ url_for('results', query = query3, lang = lang, date = date3) }}">{{query3}}</a>
+							<a href="{{ url_for('results', query = query4, lang = lang, date = date4) }}">{{query4}}</a>
+							<a href="{{ url_for('results', query = query5, lang = lang, date = date5) }}">{{query5}}</a> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- The circle icons use Font Awesome's stacked icon classes. For more information, visit http://fontawesome.io/examples/ -->
+
+    <!-- Call to Action -->
+    <aside class="call-to-action bg-primary">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <a href="#" class="btn btn-lg btn-dark">About us</a>
+
+                </div>
+            </div>
+        </div>
+    </aside>
+
+
+    <!-- jQuery -->
+    <script src="{{ url_for('static', filename='jquery.js') }}"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{{ url_for('static', filename='bootstrap.min.js') }}"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script>
+    // Closes the sidebar menu
+    $("#menu-close").click(function(e) {
+        e.preventDefault();
+        $("#sidebar-wrapper").toggleClass("active");
+    });
+
+    // Opens the sidebar menu
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#sidebar-wrapper").toggleClass("active");
+    });
+
+    // Scrolls to the selected menu item on the page
+    $(function() {
+        $('a[href*=#]:not([href=#])').click(function() {
+            if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') || location.hostname == this.hostname) {
+
+                var target = $(this.hash);
+                target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+                if (target.length) {
+                    $('html,body').animate({
+                        scrollTop: target.offset().top
+                    }, 1000);
+                    return false;
+                }
+            }
+        });
+    });
+    </script>
+</body>
+
+</html>

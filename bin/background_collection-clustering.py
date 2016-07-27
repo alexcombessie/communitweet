@@ -7,7 +7,7 @@ import datetime
 
 t0 = time()
 
-sys.path.append('C:/CommuniTweet/')
+sys.path.append('./CommuniTweet/')
 
 # Importing custom modules
 from CommuniTweet.twscrap import TwitterApiUtil
@@ -27,7 +27,7 @@ if search["Priority"] == 1:
     raw_data = tw_util.get_tweets_from_search_cleaned(query_to_be_processed,n_items_search=1000,n_tweets_per_user=100,lang=lang)
     mlab.update_status_collected(query_to_be_processed,lang,date,True) 
     mlab.update_processing_date(query_to_be_processed,lang,date)
-    if len(raw_data["users"])<5:
+    if len(raw_data["users"])<50:
         print("Too few users for your query")
         mlab.update_status_collected(query_to_be_processed,lang,date,"Too few users")
         mlab.update_status_clustered(query_to_be_processed,lang,date,"Too few users")
@@ -52,7 +52,7 @@ elif search["Priority"] == 2:
     raw_data = tw_util.get_tweets_from_search_cleaned(query_to_be_processed,n_items_search=1000,n_tweets_per_user=100,lang=lang)
     mlab.update_status_collected(query_to_be_processed,lang,date,True) 
     mlab.update_processing_date(query_to_be_processed,lang,date)
-    if len(raw_data["users"])<5:
+    if len(raw_data["users"])<50:
         print("Too few users for your query")
         mlab.update_status_collected(query_to_be_processed,lang,date,"Too few users")
         mlab.update_status_clustered(query_to_be_processed,lang,date,"Too few users")
@@ -77,7 +77,7 @@ elif search["Priority"] == 3:
     print("Processing query:" + query_to_be_processed.encode("utf-8") + " in "+ lang + " of " + date)
     raw_data = tw_util.get_tweets_from_search_cleaned(query_to_be_processed,n_items_search=1000,n_tweets_per_user=100,lang=lang)
     mlab.update_status_collected(query_to_be_processed,lang,date,True) 
-    if len(raw_data["users"])<5:
+    if len(raw_data["users"])<50:
         print("Too few users for your query")
         mlab.update_status_collected(query_to_be_processed,lang,date,"Too few users")
         mlab.update_status_clustered(query_to_be_processed,lang,date,"Too few users")

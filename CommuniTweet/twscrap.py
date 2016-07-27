@@ -9,7 +9,7 @@ import tweepy
 from progressbar import Bar, ETA, Percentage, ProgressBar
 
 import sys
-sys.path.append('C:/CommuniTweet/')
+sys.path.append('./CommuniTweet/')
 import CommuniTweet.textprocessing64 as txtpro
 
 consumer_key = ast.literal_eval(os.environ.get('CONSUMER_KEY'))

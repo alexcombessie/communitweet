@@ -18,7 +18,7 @@ app = Flask(__name__)
 
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'this_should_be_configured')
 
-#sys.path.append('C:/CommuniTweet/templates')
+#sys.path.append('./templates')
 
 ###
 # Routing for your application.

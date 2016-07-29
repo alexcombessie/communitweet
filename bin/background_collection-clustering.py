@@ -7,15 +7,16 @@ import datetime
 
 t0 = time()
 
-sys.path.append('./CommuniTweet/')
+#sys.path.append('./CommuniTweet/')
+sys.path.append('C:/CommuniTweet/CommuniTweet')
 
 # Importing custom modules
-from CommuniTweet.twscrap import TwitterApiUtil
+from twscrap import TwitterApiUtil
 
 tw_util = TwitterApiUtil()
 
-import CommuniTweet.mongolab as mlab
-import CommuniTweet.docluster as clust
+import mongolab as mlab
+import docluster as clust
 
 search = mlab.download_query()
 if search["Priority"] == 1:

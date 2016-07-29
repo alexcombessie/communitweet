@@ -9,8 +9,9 @@ import tweepy
 from progressbar import Bar, ETA, Percentage, ProgressBar
 
 import sys
-sys.path.append('./CommuniTweet/')
-import CommuniTweet.textprocessing64 as txtpro
+#sys.path.append('./CommuniTweet/')
+sys.path.append('C:/CommuniTweet/CommuniTweet')
+import textprocessing64 as txtpro
 
 consumer_key = ast.literal_eval(os.environ.get('CONSUMER_KEY'))
 consumer_secret = ast.literal_eval(os.environ.get('CONSUMER_SECRET'))
@@ -143,6 +144,7 @@ class TwitterApiUtil():
         tw_text = []
         tw_name = []
         tw_dict = []
+        new_tweets = []
         time.sleep(1)
         print("Downloading tweets from users...")
         pbar = ProgressBar(widgets=[Percentage(), ' ', Bar(), ' ', ETA()]).start()
@@ -156,8 +158,7 @@ class TwitterApiUtil():
                     time.sleep(2 * 60)
             new_text = [x.text.encode("utf-8", errors="ignore").decode("utf-8", errors="ignore") for x in new_tweets if
                         x.lang == lang]
-            new_name = str(
-                new_tweets[0].user.screen_name.encode("utf-8", errors="ignore").decode("utf-8", errors="ignore"))
+            new_name = str(new_tweets[0].user.screen_name.encode("utf-8", errors="ignore").decode("utf-8", errors="ignore"))
             new_dict = {"screen_name": new_name, "text": new_text}
             tw_text.append(new_text)
             tw_name.append(new_name)

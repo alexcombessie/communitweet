@@ -11,14 +11,15 @@ import json
 import ast
 
 import sys
-import CommuniTweet.mongolab as mlab
+sys.path.append('C:/CommuniTweet/CommuniTweet')
+import mongolab as mlab
 
 
 app = Flask(__name__)
 
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'this_should_be_configured')
 
-#sys.path.append('./templates')
+sys.path.append('C:/CommuniTweet/templates')
 
 ###
 # Routing for your application.
@@ -99,10 +100,10 @@ def results(query,lang,date):
                 query = query, lang=lang, date=date, LangBeautifulString=LangBeautifulString, Languages=Languages)
         
 
-@app.route('/about/')
-def about():
+@app.route('/about_us/')
+def about_us():
     """Render the website's about page."""
-    return render_template('results.html')
+    return render_template('about_us.html')
 
 
 @app.errorhandler(404)

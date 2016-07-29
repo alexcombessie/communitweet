@@ -11,8 +11,11 @@ import json
 import ast
 
 import sys
-sys.path.append('C:/CommuniTweet/CommuniTweet')
-import mongolab as mlab
+#sys.path.append('C:/CommuniTweet/CommuniTweet')
+#import mongolab as mlab
+
+sys.path.append('./CommuniTweet/')
+import CommuniTweet.mongolab as mlab
 
 
 app = Flask(__name__)

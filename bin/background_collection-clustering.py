@@ -14,7 +14,7 @@ tw_util = TwitterApiUtil()
 import CommuniTweet.mongolab as mlab
 import CommuniTweet.docluster as clust
 
-##ys.path.append('C:/CommuniTweet/CommuniTweet')
+#sys.path.append('C:/CommuniTweet/CommuniTweet')
 # Importing custom modules
 #from twscrap import TwitterApiUtil
 #tw_util = TwitterApiUtil()

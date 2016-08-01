@@ -20,7 +20,6 @@ consumer_secret = ast.literal_eval(os.environ.get('CONSUMER_SECRET'))
 access_token = ast.literal_eval(os.environ.get('ACCESS_TOKEN'))
 access_secret = ast.literal_eval(os.environ.get('ACCESS_SECRET'))
 
-
 # origin=['alteralec','giftguru','imachraoui','thibaut','laura','thibaut2']
 
 class TwitterApiUtil():

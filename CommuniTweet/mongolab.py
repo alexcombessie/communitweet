@@ -19,7 +19,7 @@ db = client.ensae_twitter
 def upload_twitter_query(dict_object):
     time.sleep(1)
     print("Uploading Twitter data to mLab...")
-    db.twitter_query1.insert_one(json.loads(json.dumps(dict_object)))
+    db.twitter_query.insert_one(json.loads(json.dumps(dict_object)))
 
 
 def upload_twitter_raw(dict_object):
@@ -31,23 +31,23 @@ def upload_twitter_raw(dict_object):
 def upload_twitter_community(dict_object):
     time.sleep(1)
     print("Uploading community structure to mLab...")
-    db.twitter_community1.insert_one(json.loads(json.dumps(dict_object)))
+    db.twitter_community.insert_one(json.loads(json.dumps(dict_object)))
 
 def checkLastFiveResultsPriority3():
-    results = list(db.twitter_query1.find({"Priority":3}))
+    results = list(db.twitter_query.find({"Priority":3}))
     now = datetime.datetime.now().date()
     results = [i for i in results if (now-datetime.datetime.strptime(str(i["date of processing"]),'%Y-%m-%d').date()).days >= 7]
     while len(results)>0:
         query=choice(results)
-        PastQueries=[j for j in list(db.twitter_query1.find({"query":query["query"],"language":query["language"],"Priority":{"$in":[3,False]}}))]
+        PastQueries=[j for j in list(db.twitter_query.find({"query":query["query"],"language":query["language"],"Priority":{"$in":[3,False]}}))]
         Dates=[]
         for k in PastQueries:
             Dates.append(datetime.datetime.strptime(k["date"],'%Y-%m-%d').date())
         Dates=sorted(Dates)
-        query=list(db.twitter_query1.find({"query":query["query"],"language":query["language"],"date":str(max(Dates)),"Priority":{"$in":[3,False]}}))
+        query=list(db.twitter_query.find({"query":query["query"],"language":query["language"],"date":str(max(Dates)),"Priority":{"$in":[3,False]}}))
         if len(Dates)>=5:
             for l in range(1,6):
-                a=list(db.twitter_query1.find({"query":query[0]["query"],"language":query[0]["language"],"date":str(Dates[-l]),"Priority":{"$in":[3,False]}}))
+                a=list(db.twitter_query.find({"query":query[0]["query"],"language":query[0]["language"],"date":str(Dates[-l]),"Priority":{"$in":[3,False]}}))
                 if a[0]["collected"] != "Too few users":
                     query[0]["check"]=True
                     uploadToMongolab(query[0]["query"],query[0]["language"],3)
@@ -71,11 +71,11 @@ def checkLastFiveResultsPriority3():
 # Download query result from Mongolab (replace collection by collection name before running)
 def download_query():
     now = datetime.datetime.now().date()
-    results = list(db.twitter_query1.find({"Priority":2}))
+    results = list(db.twitter_query.find({"Priority":2}))
     results = [i for i in results if (now-datetime.datetime.strptime(str(i["date of processing"]),'%Y-%m-%d').date()).days >= 7]
     Prio3=checkLastFiveResultsPriority3()
-    if db.twitter_query1.find({'Priority': 1}).count() > 0:
-        results = list(db.twitter_query1.find({"Priority":1}))
+    if db.twitter_query.find({'Priority': 1}).count() > 0:
+        results = list(db.twitter_query.find({"Priority":1}))
         query=choice(results)
         return (query)
     elif len(results) > 0:
@@ -95,12 +95,12 @@ def download_raw(query):
 
 def download_community(query):
     print("Downloading community structure from mLab...")
-    results = db.twitter_community1.find({"query": str(query)})
+    results = db.twitter_community.find({"query": str(query)})
     return (list(results)[-1])
 
 
 def update_status_collected(query, lang, date, modif=True):
-    db.twitter_query1.update_one(
+    db.twitter_query.update_one(
         {"query": query, "language":lang,"date":date},
         {
             "$set": {
@@ -111,7 +111,7 @@ def update_status_collected(query, lang, date, modif=True):
 
 
 def update_status_clustered(query,lang,date, modif=True):
-    db.twitter_query1.update_one(
+    db.twitter_query.update_one(
         {"query": query, "language":lang,"date":date},
         {
             "$set": {
@@ -121,7 +121,7 @@ def update_status_clustered(query,lang,date, modif=True):
     )
 
 def update_processing_date(query,lang,date):
-    db.twitter_query1.update_one(
+    db.twitter_query.update_one(
         {"query": query, "language":lang,"date":date},
         {
             "$set": {
@@ -131,7 +131,7 @@ def update_processing_date(query,lang,date):
     )
 
 def update_priority(query,lang,date,priority):
-    db.twitter_query1.update_one(
+    db.twitter_query.update_one(
         {"query": query, "language":lang,"date":date},
         {
             "$set": {
@@ -141,17 +141,17 @@ def update_priority(query,lang,date,priority):
     )
     
 def clear_all_db():
-    db.twitter_query1.delete_many({})
+    db.twitter_query.delete_many({})
     db.twitter_raw.delete_many({})
-    db.twitter_community1.delete_many({})
+    db.twitter_community.delete_many({})
 
 def delete_query(query):
-    db.twitter_query1.delete_many({"query": query})
+    db.twitter_query.delete_many({"query": query})
 
 def FindTheMostRecentResult(text,lang):
     text = text.strip().lower()
     lang = lang.strip().lower()
-    c=db.twitter_community1.find({'query': text, 'language':lang})
+    c=db.twitter_community.find({'query': text, 'language':lang})
     result=list(c)
     Dates=[]
     for i in range(0,len(result)):
@@ -160,7 +160,7 @@ def FindTheMostRecentResult(text,lang):
 
 
 def chooseQueryRandomly(lang):
-    c=list(db.twitter_community1.find({"language": lang}))
+    c=list(db.twitter_community.find({"language": lang}))
     randomqueries = []
     Dates=[]
     Queries=[]
@@ -201,18 +201,18 @@ def Encoding(query):
 def uploadToMongolab(text,lang,priority):
     line = {'query' : text, 'collected': False, 'community': False, 'date': str(datetime.datetime.now().date()), 'language': lang, "Priority":priority,"date of processing":str(datetime.datetime.now().date())}
     if line != "\n":
-      db.twitter_query1.insert_one(line)
+      db.twitter_query.insert_one(line)
 
 def AlreadyInCollectionQuery(text,language):
     text = text.strip().lower()
     language = language.strip().lower()
-    results=db.twitter_query1.find({'query': text, 'language':language})
+    results=db.twitter_query.find({'query': text, 'language':language})
     if results.count() == 0:
         return "No"
     Dates=[]
     for k in results:
         Dates.append(datetime.datetime.strptime(k["date"],'%Y-%m-%d').date())
-    query=db.twitter_query1.find({"query":text,"language":language,"date":str(max(Dates))})
+    query=db.twitter_query.find({"query":text,"language":language,"date":str(max(Dates))})
     if query[0]["Priority"] == 3:
         return "Too few users"
     elif query[0]["Priority"] == 1 or query[0]["Priority"] == 2:
@@ -223,13 +223,13 @@ def AlreadyInCollectionQuery(text,language):
 def AlreadyInCollectionCommunity(text,language):
     text = text.strip().lower()
     language = language.strip().lower()
-    if db.twitter_community1.find({'query': text,"language": language}).count() > 0:
+    if db.twitter_community.find({'query': text,"language": language}).count() > 0:
         return True
     else:
         return False
 
 def downloadOtherResultsForTheQuery(query):
-    FormerQueries=list(db.twitter_query1.find({"query":query}))
+    FormerQueries=list(db.twitter_query.find({"query":query}))
     results={"Dutch":[],"English":[],"French":[],"German":[],"Italian":[],"Spanish":[]}
     for j in FormerQueries:
         if j["language"] == "nl":
@@ -251,7 +251,7 @@ def downloadOtherResultsForTheQuery(query):
 def FindTheMostRecentResult(text,lang):
     text = text.strip().lower()
     lang = lang.strip().lower()
-    c=db.twitter_community1.find({'query': text, 'language':lang})
+    c=db.twitter_community.find({'query': text, 'language':lang})
     result=list(c)
     Dates=[]
     for i in range(0,len(result)):
@@ -259,7 +259,7 @@ def FindTheMostRecentResult(text,lang):
     return str(max(Dates))
 
 def getCommunityInfo(text,lang,date):
-    results_cursor = db.twitter_community1.find({'query': text,"language":lang,"date":date})
+    results_cursor = db.twitter_community.find({'query': text,"language":lang,"date":date})
     for document in results_cursor:
         return document
 

@@ -91,7 +91,7 @@
 										{% endif %}
 									{% endfor %}
 								</select>
-								<button type="submit">Go!</button>
+								<button type="submit" name="old_queries">Go!</button>
 							</h4>
 						</center>
 					</form>
@@ -104,9 +104,19 @@
         <div class="row">
                 <div class="col-md-6 portfolio-item">
                     <h3>
-                        <a href="#">Community 1</a>
+                        <a href="#">Community 1{% for i in range(0,4) %}{{i}}{% endfor %}</a>
                     </h3>
                     <p>{{ communitySize[0] }} Twitter accounts ({{ communityPercent[0] }} % of the considered accounts).</p>
+					<p>
+						<form action="twitter_redirection1" method="GET">
+							<select style="margin-left:53px;height:25px;width:200px;font-size:15px;color:black" name="community1">
+								{% for x in communityAccounts[0] %}
+									<option value='{{x}}'>{{x}}</option>
+								{% endfor %}
+							</select>
+							<button type="submit" namme="community1">Go!</button>
+						</form>
+					</p>
                     <div id = "keywords" class="col-md-6"></div>
                     <script type="text/javascript">
                         function test_func(words) {
@@ -129,6 +139,16 @@
                         <a href="#">Community 2</a>
                     </h3>
                     <p>{{ communitySize[1] }} Twitter accounts ({{ communityPercent[1] }} % of the considered accounts).</p>
+					<p>
+						<form action="twitter_redirection2" method="GET">
+							<select style="margin-left:53px;height:25px;width:200px;font-size:15px;color:black" name="community2">
+								{% for x in communityAccounts[1] %}
+									<option value='{{x}}'>{{x}}</option>
+								{% endfor %}
+							</select>
+							<button type="submit" namme="community2">Go!</button>
+						</form>
+					</p>
                     <div id = "keywordsa" class="col-md-6"></div>
                     <script type="text/javascript">
                         function test_func(words) {
@@ -155,6 +175,16 @@
                         <a href="#">Community 3</a>
                     </h3>
                     <p>{{ communitySize[2] }} Twitter accounts ({{ communityPercent[2] }} % of the considered accounts).</p>
+					<p>
+						<form action="twitter_redirection3" method="GET">
+							<select style="margin-left:53px;height:25px;width:200px;font-size:15px;color:black" name="community3">
+								{% for x in communityAccounts[2] %}
+									<option value='{{x}}'>{{x}}</option>
+								{% endfor %}
+							</select>
+							<button type="submit" namme="community3">Go!</button>
+						</form>
+					</p>
                     <div id = "keywordsb" class="col-md-6"></div>
                     <script type="text/javascript">
                         function test_func(words) {
@@ -176,6 +206,16 @@
                         <a href="#">Community 4</a>
                     </h3>
                     <p>{{ communitySize[3] }} Twitter accounts ({{ communityPercent[3] }} % of the considered accounts).</p>
+					<p>
+						<form action="twitter_redirection4" method="GET">
+							<select style="margin-left:53px;height:25px;width:200px;font-size:15px;color:black" name="community4">
+								{% for x in communityAccounts[3] %}
+									<option value='{{x}}'>{{x}}</option>
+								{% endfor %}
+							</select>
+							<button type="submit" namme="community4">Go!</button>
+						</form>
+					</p>
                     <div id = "keywordsc" class="col-md-6"></div>
                     <script type="text/javascript">
                         function test_func(words) {

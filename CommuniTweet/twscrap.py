@@ -9,11 +9,11 @@ import tweepy
 from progressbar import Bar, ETA, Percentage, ProgressBar
 
 import sys
-sys.path.append('./CommuniTweet/')
-import CommuniTweet.textprocessing64 as txtpro
+#sys.path.append('./CommuniTweet/')
+#import CommuniTweet.textprocessing64 as txtpro
 
-#sys.path.append('C:/CommuniTweet/CommuniTweet')
-#import textprocessing64 as txtpro
+sys.path.append('C:/CommuniTweet/CommuniTweet')
+import textprocessing64 as txtpro
 
 consumer_key = ast.literal_eval(os.environ.get('CONSUMER_KEY'))
 consumer_secret = ast.literal_eval(os.environ.get('CONSUMER_SECRET'))

@@ -11,11 +11,11 @@ import json
 import ast
 
 import sys
-#sys.path.append('C:/CommuniTweet/CommuniTweet')
-#import mongolab as mlab
+sys.path.append('C:/CommuniTweet/CommuniTweet')
+import mongolab as mlab
 
-sys.path.append('./CommuniTweet/')
-import CommuniTweet.mongolab as mlab
+#sys.path.append('./CommuniTweet/')
+#import CommuniTweet.mongolab as mlab
 
 
 app = Flask(__name__)
@@ -90,15 +90,17 @@ def results(query,lang,date):
     else:
         results=mlab.downloadOtherResultsForTheQuery(query)
         communityWords=[]
+        communityAccounts=[]
         communitySize=[]
         communityPercent=[]
         for i in range(0,4):
             communityWords.append(json.dumps(mlab.communityWords(query,lang,date,i)))
+            communityAccounts.append(mlab.communityAccounts(query,lang,date,i))
             communitySize.append(mlab.communitySize(query,lang,date,i))
             communityPercent.append(mlab.communitySizePercent(query,lang,date,i))
         LangBeautifulString=mlab.changeLanguageCharacterString(lang)
         Languages=["Dutch","English","French","German","Italian","Spanish"]
-        return render_template('results.html', results=results, communityWords = communityWords, 
+        return render_template('results.html', results=results, communityWords = communityWords, communityAccounts=communityAccounts,
                 communitySize = communitySize, communityPercent = communityPercent, 
                 query = query, lang=lang, date=date, LangBeautifulString=LangBeautifulString, Languages=Languages)
         
@@ -107,6 +109,26 @@ def results(query,lang,date):
 def about_us():
     """Render the website's about page."""
     return render_template('about_us.html')
+
+@app.route('/results/twitter_redirection1')
+def twitter_redirection1():
+    Community1Account=request.args.get('community1')
+    return redirect("https://twitter.com/"+Community1Account,code=302)
+    
+@app.route('/results/twitter_redirection2')
+def twitter_redirection2():
+    Community2Account=request.args.get('community2')
+    return redirect("https://twitter.com/"+Community2Account,code=302)
+    
+@app.route('/results/twitter_redirection3')
+def twitter_redirection3():
+    Community3Account=request.args.get('community3')
+    return redirect("https://twitter.com/"+Community3Account,code=302)
+    
+@app.route('/results/twitter_redirection4')
+def twitter_redirection4():
+    Community4Account=request.args.get('community4')
+    return redirect("https://twitter.com/"+Community4Account,code=302)
 
 
 @app.errorhandler(404)

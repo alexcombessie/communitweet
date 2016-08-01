@@ -199,7 +199,7 @@ def Encoding(query):
     return text
    
 def uploadToMongolab(text,lang,priority):
-    line = {'query' : text, 'collected': False, 'community': False, 'date': str(datetime.datetime.now().date()), 'language': lang, "Priority":priority}
+    line = {'query' : text, 'collected': False, 'community': False, 'date': str(datetime.datetime.now().date()), 'language': lang, "Priority":priority,"date of processing":str(datetime.datetime.now().date())}
     if line != "\n":
       db.twitter_query1.insert_one(line)
 
@@ -292,5 +292,11 @@ def communityWords(text,lang,date,i):
         if community_i['words'][i]['weight'] > max_weight/factor:
             results.append(community_i['words'][i])
     return results
+    
+def communityAccounts(text,lang,date,i):
+    raw_result = getCommunityInfo(text,lang,date)
+    community_i_accounts = raw_result['communities'][i]["screen_names"]
+    return community_i_accounts
+    
 
 client.close()

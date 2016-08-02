@@ -7,7 +7,7 @@ import datetime
 
 t0 = time()
 
-print t0
+print t0/60
 
 sys.path.append('./CommuniTweet/')
 # Importing custom modules

@@ -7,6 +7,8 @@ import datetime
 
 t0 = time()
 
+print t0
+
 sys.path.append('./CommuniTweet/')
 # Importing custom modules
 from CommuniTweet.twscrap import TwitterApiUtil

@@ -67,8 +67,8 @@ DutchStopwords = list(set(stopwords.words('dutch')))
 DutchStopwords.extend([u'rt',u'gt',u'amp'])
 
 excludepunctuation = list(set(string.punctuation))
-excludepunctuation.extend([u'`',u'`','`','`',"'",'`','`','+',"'",'`',"'",'\\\\','`',"’","'","...","`","…","..","’",". . .","�","“","_","\ufffd","—","'"])
-excludepunctuation = {i.decode("utf-8") for i in excludepunctuation}
+excludepunctuation.extend(["`",u'`','`','`',"'",'`','`','+',"'",'`',"'",'\\\\','`',"’","'","...","`","…","..","’",". . .","�","“","_","\ufffd","—","'"])
+excludepunctuation = {i.decode("utf-8") for i in excludepunctuation}        
 
 ######################## REMOVE URL
 URLpattern = re.compile("http[s]?(?:[a-z]|[0-9]|[$-_@.&…+]|[!*\(\),]|(?:%[0-9a-f][0-9a-f]))+")

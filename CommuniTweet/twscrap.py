@@ -8,7 +8,6 @@ import time
 import tweepy
 from progressbar import Bar, ETA, Percentage, ProgressBar
 from numpy import random
-from math import abs
 
 import sys
 sys.path.append('./CommuniTweet/')

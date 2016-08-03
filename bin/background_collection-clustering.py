@@ -30,7 +30,7 @@ if search["Priority"] == 1:
     date = str(search["date"])
     print("Priority:1\n")
     print("Processing query:" + query_to_be_processed + " in "+ lang + " of " + date)
-    raw_data = tw_util.get_tweets_from_search_cleaned(query_to_be_processed,n_items_search=1000,n_tweets_per_user=150,lang=lang)
+    raw_data = tw_util.get_tweets_from_search_cleaned(query_to_be_processed,n_items_search=900,n_tweets_per_user=150,lang=lang)
     mlab.update_status_collected(query_to_be_processed,lang,date,True) 
     mlab.update_processing_date(query_to_be_processed,lang,date)
     if len(raw_data["users"])<50:
@@ -55,7 +55,7 @@ elif search["Priority"] == 2:
     date=str(datetime.datetime.now().date())
     print("Priority:2\n")
     print("Processing query:" + query_to_be_processed + " in "+ lang + " of " + date)
-    raw_data = tw_util.get_tweets_from_search_cleaned(query_to_be_processed,n_items_search=1000,n_tweets_per_user=150,lang=lang)
+    raw_data = tw_util.get_tweets_from_search_cleaned(query_to_be_processed,n_items_search=900,n_tweets_per_user=150,lang=lang)
     mlab.update_status_collected(query_to_be_processed,lang,date,True) 
     mlab.update_processing_date(query_to_be_processed,lang,date)
     if len(raw_data["users"])<50:
@@ -81,7 +81,7 @@ elif search["Priority"] == 3:
     date=str(datetime.datetime.now().date())
     print("Priority:3\n")
     print("Processing query:" + query_to_be_processed.encode("utf-8") + " in "+ lang + " of " + date)
-    raw_data = tw_util.get_tweets_from_search_cleaned(query_to_be_processed,n_items_search=1000,n_tweets_per_user=150,lang=lang)
+    raw_data = tw_util.get_tweets_from_search_cleaned(query_to_be_processed,n_items_search=900,n_tweets_per_user=150,lang=lang)
     mlab.update_status_collected(query_to_be_processed,lang,date,True) 
     if len(raw_data["users"])<50:
         print("Too few users for your query")

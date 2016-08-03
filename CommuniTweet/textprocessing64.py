@@ -219,17 +219,23 @@ def doc_to_words(doc, query_filter="", lang="fr", date="", stopwords=True, exclu
             words = [x for x in words if x not in excludepunctuation]
         if stopwords:
             words = [x for x in words if x not in text_processor[lang]["Stopwords"]]
-        print "words1",words
         if POStagfilter:
             tags = [text_processor[lang]["POSTagger"](word)[-1] for word in words]
             words = [x[0] for x in tags if x[1] in TagSelection]
         if stemming: words = [text_processor[lang]["Stemmer"].stem(x) for x in words]
         if lemmatization: words = [text_processor[lang]["Lemmatizer"](x) for x in words]
+        #words1=words        
+        #print "words1",words1        
         if excludepunct:
             words = [x for x in words if x not in excludepunctuation]        
         if stopwords:
             words = [x for x in words if x not in text_processor[lang]["Stopwords"]]
-        print "words2",words
+        #words2=words
+        #print "words2",words2
+        #if words1==words2:
+            #print "\n\n\nTRUE\n\n\n"
+        #else:
+            #print "\n\n\nFALSE\n\n\n"
     return(filter(None, words))
 
 

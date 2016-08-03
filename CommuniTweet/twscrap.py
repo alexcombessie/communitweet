@@ -108,7 +108,7 @@ class TwitterApiUtil():
             print "x:",x
             print "apis_reset",apis_reset
             if max([x["remaining"] for x in self.rate_limit_app]) < 1:
-                time.sleep(min(apis_reset))
+                time.sleep(abs(min(apis_reset)))
                 print("sleeping for " + str(min(apis_reset)) + " seconds")
                 self.current_api_index = apis_reset.index(min(apis_reset))
             else:

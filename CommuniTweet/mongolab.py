@@ -229,7 +229,7 @@ def AlreadyInCollectionCommunity(text,language):
         return False
 
 def downloadOtherResultsForTheQuery(query):
-    FormerQueries=list(db.twitter_query.find({"query":query}))
+    FormerQueries=list(db.twitter_community.find({"query":query}))
     results={"Dutch":[],"English":[],"French":[],"German":[],"Italian":[],"Spanish":[]}
     for j in FormerQueries:
         if j["language"] == "nl":

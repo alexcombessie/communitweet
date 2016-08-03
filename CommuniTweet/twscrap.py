@@ -8,6 +8,7 @@ import time
 import tweepy
 from progressbar import Bar, ETA, Percentage, ProgressBar
 from numpy import random
+from math import abs
 
 import sys
 sys.path.append('./CommuniTweet/')
@@ -90,7 +91,7 @@ class TwitterApiUtil():
             apis_reset = [x["reset"] - time.time() for x in apis_status]
             current_remaining = apis_remaining[self.current_api_index]
             if max(apis_remaining) < 80:
-                time.sleep(min(apis_reset))
+                time.sleep(abs(min(apis_reset)))
                 self.current_api_index = apis_reset.index(min(apis_reset))
             else:
                 self.current_api_index = apis_remaining.index(max(apis_remaining))
@@ -104,6 +105,9 @@ class TwitterApiUtil():
                                    self.rate_limit_status]
             self.rate_limit_counter = [x["remaining"] for x in self.rate_limit_app][self.current_api_index]
             apis_reset = [x["reset"] - time.time() for x in self.rate_limit_app]
+            print "self.rate_limit_app",self.rate_limit_app            
+            print "x:",x
+            print "apis_reset",apis_reset
             if max([x["remaining"] for x in self.rate_limit_app]) < 1:
                 time.sleep(min(apis_reset))
                 print("sleeping for " + str(min(apis_reset)) + " seconds")

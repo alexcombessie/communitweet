@@ -67,7 +67,7 @@ DutchStopwords = list(set(stopwords.words('dutch')))
 DutchStopwords.extend([u'rt',u'gt',u'amp'])
 
 excludepunctuation = list(set(string.punctuation))
-excludepunctuation.extend(["`",u'`','`','`',"'",'`','`','+',"'",'`',"'",'\\\\','`',"’","'","...","`","…","..","’",". . .","�","“","_","\ufffd","—","'"])
+excludepunctuation.extend([u'``',"`",u'`','`','`',"'",'`','`','+',"'",'`',"'",'\\\\','`',"’","'","...","`","…","..","’",". . .","�","“","_","\ufffd","—","'"])
 excludepunctuation = {i.decode("utf-8") for i in excludepunctuation}        
 
 ######################## REMOVE URL
@@ -219,12 +219,17 @@ def doc_to_words(doc, query_filter="", lang="fr", date="", stopwords=True, exclu
             words = [x for x in words if x not in excludepunctuation]
         if stopwords:
             words = [x for x in words if x not in text_processor[lang]["Stopwords"]]
+        print "words1",words
         if POStagfilter:
             tags = [text_processor[lang]["POSTagger"](word)[-1] for word in words]
             words = [x[0] for x in tags if x[1] in TagSelection]
         if stemming: words = [text_processor[lang]["Stemmer"].stem(x) for x in words]
         if lemmatization: words = [text_processor[lang]["Lemmatizer"](x) for x in words]
-
+        if excludepunct:
+            words = [x for x in words if x not in excludepunctuation]        
+        if stopwords:
+            words = [x for x in words if x not in text_processor[lang]["Stopwords"]]
+        print "words2",words
     return(filter(None, words))
 
 

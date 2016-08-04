@@ -42,8 +42,6 @@ def cluster_tweets(tweetdic, n_clusters=4, n_word_out=100, max_df=0.95, min_df=0
     original_space_centroids = svd.inverse_transform(km.cluster_centers_)
     order_centroids = original_space_centroids.argsort()[:, ::-1]
     terms = vectorizer.get_feature_names()
-    #print "\n", order_centroids
-    #print "\n", terms
 
     community_list = []
     for i in range(n_clusters):

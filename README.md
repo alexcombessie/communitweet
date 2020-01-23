@@ -1,7 +1,7 @@
 # CommuniTweet
 ## Find communities around a topic on Twitter
 
-http://communitweet.herokuapp.com/
+https://communitweet.herokuapp.com/
 
 Capstone project in Python for the Master of Data Science at ENSAE ParisTech (2016)
 

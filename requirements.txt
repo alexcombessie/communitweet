@@ -13,7 +13,7 @@ requests-oauthlib==0.6.1
 simplegeneric==0.8.1
 six==1.10.0
 traitlets==4.2.1
-tweepy==3.5.0
+tweepy==3.8.0
 virtualenv==15.0.1
 decorator==4.0.9
 Flask==0.11.1

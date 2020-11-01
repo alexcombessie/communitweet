@@ -15,7 +15,7 @@ six==1.10.0
 traitlets==4.2.1
 tweepy==3.9.0
 virtualenv==15.0.1
-decorator==4.0.9
+decorator==4.4.2
 Flask==1.0
 Jinja2>=2.8.1
 gunicorn==20.0.4
